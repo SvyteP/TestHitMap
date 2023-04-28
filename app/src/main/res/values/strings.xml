@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestHitMap</string>
+
+    <string name="accessibility_service_label">Be Codey Service</string>
+    <string name="accessibility_service_description">My description</string>
+
+</resources>
