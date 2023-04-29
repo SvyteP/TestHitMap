@@ -4,9 +4,11 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 public class MyAccessibilityService extends AccessibilityService {
 
@@ -15,6 +17,33 @@ public class MyAccessibilityService extends AccessibilityService {
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+
+        switch (event.getEventType()) {
+            case AccessibilityEvent.TYPE_VIEW_CLICKED:
+            case AccessibilityEvent.TYPE_VIEW_SCROLLED:
+                // получаем информацию о нажатой View
+                AccessibilityNodeInfo nodeInfo = event.getSource();
+
+                if (nodeInfo == null) {
+                    return;
+                }
+
+                // получаем координаты нажатия
+                Rect rect = new Rect();
+                nodeInfo.getBoundsInScreen(rect);
+                int x = rect.centerX();
+                int y = rect.centerY();
+                Log.e(TAG,"X="+x + " Y=" +y);
+                // обрабатываем координаты нажатия
+                // ...
+
+                break;
+            default:
+                break;
+
+        }
+
+
 
         Log.e(TAG, "onAccessibilityEvent: ");
         // Здесь обрабатываются события от других приложений
@@ -32,8 +61,9 @@ public class MyAccessibilityService extends AccessibilityService {
 
         }
 
+    }
 
-        }
+
 
     @Override
     public void onInterrupt() {
