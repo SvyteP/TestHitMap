@@ -82,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
             int idValue = cursor.getInt(idIndex);
             String XValue = cursor.getString(XIndex);
             int YValue = cursor.getInt(YIndex);
+            String namepValue = cursor.getString(namepIndex);
+            String nameeValue = cursor.getString(nameeIndex);
 
-            dataBuilder.append(String.format(Locale.UK, "ID= %d, NAME= %s, PASSWORD= %d \n", idValue, XValue, YValue, namepIndex, nameeIndex));
+            dataBuilder.append(String.format(Locale.UK, "ID= %d, X= %s, Y= %d, NAMEP= %s, NAMEE= %s \n", idValue, XValue, YValue, namepValue, nameeValue));
         }
 
         cursor.close();
